@@ -1,0 +1,51 @@
+name: "sign-push-action"
+author: rmartsev
+description: "Sign docker images and push to container registry"
+branding:
+  icon: "award"
+  color: "green"
+inputs:
+  image-tags:
+    description: "list of image tags"
+    required: true
+  image-digest:
+    description: "image digest"
+    required: true
+  cosign-private-key:
+    description: "cosign private key"
+    required: true
+  cosign-password:
+    description: "cosign password for private key"
+    required: true
+
+runs:
+  using: "composite"
+
+  steps:
+
+  - name: Install Cosign
+    uses: sigstore/cosign-installer@v3.5.0
+
+  - name: Sign image with a key
+    run: |
+      images=""
+      for tag in ${TAGS}; do
+        images+="${tag}@${DIGEST} "
+      done
+      cosign sign --yes --key env://COSIGN_PRIVATE_KEY ${images}
+    env:
+      TAGS: ${{ inputs.image-tags }}
+      COSIGN_PRIVATE_KEY: ${{ sinputs.cosign-private-key }}
+      COSIGN_PASSWORD: ${{ inputs.cosign-password }}
+      DIGEST: ${{ inputs.image-digest }}
+
+  - name: Sign the images with GitHub OIDC Token
+    env:
+      DIGEST: ${{ inputs.image-digest }}
+      TAGS: ${{ inputs.image-tags }}
+    run: |
+      images=""
+      for tag in ${TAGS}; do
+        images+="${tag}@${DIGEST} "
+      done
+      cosign sign --yes ${images}
