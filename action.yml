@@ -17,23 +17,11 @@ inputs:
   cosign-password:
     description: "cosign password for private key"
     required: true
-  cosign-installer-version:
-    description: "sigstore/cosign-installer version"
-    required: false
-    default: "v3.5.0"
 
 runs:
   using: "composite"
 
   steps:
-
-  - name: Set cosign installer version
-    id: set_version
-    run: echo "COSIGN_INSTALLER_VERSION=${{ inputs.cosign-installer-version }}" >> $GITHUB_ENV
-    shell: bash
-
-  - name: Install Cosign
-    uses: sigstore/cosign-installer@${{ env.COSIGN_INSTALLER_VERSION }}
 
   - name: Sign image with a key
     env:
