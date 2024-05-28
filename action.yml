@@ -40,14 +40,14 @@ runs:
       cosign sign --yes --key env://COSIGN_PRIVATE_KEY ${images}
     shell: bash
 
-  - name: Sign the images with GitHub OIDC Token
-    env:
-      DIGEST: ${{ inputs.image-digest }}
-      TAGS: ${{ inputs.image-tags }}
-    run: |
-      images=""
-      for tag in ${TAGS}; do
-        images+="${tag}@${DIGEST} "
-      done
-      cosign sign --yes ${images}
-    shell: bash
+  # - name: Sign the images with GitHub OIDC Token
+  #   env:
+  #     DIGEST: ${{ inputs.image-digest }}
+  #     TAGS: ${{ inputs.image-tags }}
+  #   run: |
+  #     images=""
+  #     for tag in ${TAGS}; do
+  #       images+="${tag}@${DIGEST} "
+  #     done
+  #     cosign sign --yes ${images}
+  #   shell: bash
