@@ -28,7 +28,7 @@ runs:
   steps:
 
   - name: Install Cosign
-    uses: sigstore/cosign-installer@${{ inputs.codign-installer-version }}
+    uses: "sigstore/cosign-installer@${{ inputs.codign-installer-version }}"
 
   - name: Sign image with a key
     env:
