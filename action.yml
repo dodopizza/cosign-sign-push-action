@@ -1,4 +1,4 @@
-name: "sign-push-action"
+name: "cosign-sign-push-action"
 author: rmartsev
 description: "Sign docker images and push to container registry"
 branding:
