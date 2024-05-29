@@ -1,0 +1,30 @@
+name: Auto-Tag Major Version
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  tag-major-version:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Git
+      run: |
+        git config user.name "GitHub Actions"
+        git config user.email "actions@github.com"
+
+    - name: Tag Major Version
+      run: |
+        FULL_TAG=${{ github.event.release.tag_name }}
+        MAJOR_VERSION=$(echo "$FULL_TAG" | sed -E 's/^v([0-9]+)\..*/v\1/')
+        if git rev-parse "$MAJOR_VERSION" >/dev/null 2>&1; then
+          echo "Tag $MAJOR_VERSION already exists. Updating the tag..."
+          git tag -fa "$MAJOR_VERSION" -m "Update major version tag to $MAJOR_VERSION" ${{ github.event.release.target_commitish }}
+        else
+          echo "Creating new tag $MAJOR_VERSION..."
+          git tag -a "$MAJOR_VERSION" -m "Create major version tag $MAJOR_VERSION" ${{ github.event.release.target_commitish }}
+        fi
+        git push origin "$MAJOR_VERSION" --force

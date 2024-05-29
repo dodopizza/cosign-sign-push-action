@@ -1,8 +1,8 @@
-name: Move Latest Tag
+name: Auto-Tag Latest Version
 
 on:
   release:
-    types: [created]
+    types: [published]
 
 jobs:
   move-latest-tag:
