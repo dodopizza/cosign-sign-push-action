@@ -11,38 +11,38 @@
 
 ## Cosign keys
 
-### Generate 
+First, you need to create/generate a password for private key. Then generate keys:
+
+1. With docker
+
+    ```bash
+    docker run --rm -it \
+    -e COSIGN_PASSWORD=<your_private_key_password> \
+    -v "$(pwd):/keys" \
+    -w /keys \
+    bitnami/cosign:latest \
+    generate-key-pair
+    ```
+
+2. With binary:
+
+    ```bash
+    COSIGN_PASSWORD=<your_private_key_password> cosign generate-key-pair
+    ```
+
+Store keys in GitHub Action Secrets:
+
+- COSIGN_PASSWORD - a password for private key
+- COSIGN_PUBLIC_KEY - content of the file cosign.pub
+- COSIGN_PRIVATE_KEY - content of the file cosign.key
+
+You can generate and store keys directly in GitHub Actions Secrets with command:
 
 ```bash
 GITHUB_TOKEN=xxx cosign generate-key-pair github://dodopizza/app
 ```
 
-### Export
-
-You can export the public key, but not from GitHub. We'll do it manually through GHA:
-
-```yaml
-name: Show cosign public key
-on: [workflow_dispatch]
-
-jobs:
-  debug:
-    name: Debug
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Check out code
-      uses: actions/checkout@v2
-
-    - name: Set up secret file
-      env:
-        COSIGN_PUBLIC_KEY: ${{ secrets.COSIGN_PUBLIC_KEY }}
-      run: |
-        echo $COSIGN_PUBLIC_KEY >> secrets.txt
-
-    - name: Run tmate
-      uses: mxschmitt/action-tmate@v2
-```
+But remember, you can't export public key with cosign from GitHub Action Secrets. 
 
 ## Usage example:
 
