@@ -11,9 +11,15 @@
 
 ## Cosign keys
 
-First, you need to create/generate a password for private key. Then generate keys:
+First, you need to create/generate a password for private key. Then generate keys with:
 
-1. With docker
+1. [Official binary](https://docs.sigstore.dev/system_config/installation/)
+
+    ```bash
+    COSIGN_PASSWORD=<your_private_key_password> cosign generate-key-pair
+    ```
+
+2. [Docker image by VMware](https://hub.docker.com/r/bitnami/cosign/)
 
     ```bash
     docker run --rm -it \
@@ -22,12 +28,6 @@ First, you need to create/generate a password for private key. Then generate key
     -w /keys \
     bitnami/cosign:latest \
     generate-key-pair
-    ```
-
-2. With binary:
-
-    ```bash
-    COSIGN_PASSWORD=<your_private_key_password> cosign generate-key-pair
     ```
 
 Store keys in GitHub Action Secrets:
