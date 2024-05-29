@@ -1,0 +1,22 @@
+name: Move Latest Tag
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  move-latest-tag:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Git
+      run: |
+        git config user.name "GitHub Actions"
+        git config user.email "actions@github.com"
+
+    - name: Move the latest tag
+      run: |
+        git tag -fa latest -m "Update latest tag"
+        git push -f origin latest
