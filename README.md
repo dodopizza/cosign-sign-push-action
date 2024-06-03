@@ -1,29 +1,13 @@
 # cosign-sign-push-action
 
-- [cosign-sign-push-action](#cosign-sign-push-action)
-  - [Features](#features)
-  - [How to Use](#how-to-use)
-    - [Cosign Local Keys](#cosign-local-keys)
-      - [Workflow](#workflow)
-      - [Generate Key Pair](#generate-key-pair)
-    - [GitHub Action](#github-action)
-      - [Workflow](#workflow-1)
-      - [Input Variables](#input-variables)
-    - [Configure Kubernetes Cluster](#configure-kubernetes-cluster)
-      - [Workflow](#workflow-2)
-      - [Helm Chart](#helm-chart)
-      - [Create Policies](#create-policies)
-  - [Usage example:](#usage-example)
-  - [Reference links](#reference-links)
-
-## Features
+## 1. Features
 
 - Based on `cosign` local keys.
 - Signs images and pushes them to a container registry.
 
-## How to Use
+## 2. How to Use
 
-### Cosign Local Keys
+### 2.1. Cosign Local Keys
 
 #### Workflow
 
@@ -66,7 +50,7 @@ GITHUB_TOKEN=xxx cosign generate-key-pair github://dodopizza/app
 
 **Note:** You can't export the public key with `cosign` from GitHub Action Secrets.
 
-### GitHub Action
+### 2.2. GitHub Action
 
 #### Workflow
 
@@ -83,7 +67,7 @@ GITHUB_TOKEN=xxx cosign generate-key-pair github://dodopizza/app
 | `cosign-private-key` | Yes      | Cosign private key used for signing container images.                                                                     |
 | `cosign-password`    | Yes      | Password for the Cosign private key.                                                                                      |
 
-### Configure Kubernetes Cluster
+### 2.3. Configure Kubernetes Cluster
 
 #### Workflow
 
@@ -149,7 +133,7 @@ spec:
 
 For more documentation and sample policies, refer to: [docs.sigstore.dev/policy-controller/sample-policies](https://docs.sigstore.dev/policy-controller/sample-policies/)
 
-## Usage example:
+## 3. Usage example:
 
 ```yaml
 name: Build and sign image
