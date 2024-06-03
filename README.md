@@ -1,5 +1,21 @@
 # cosign-sign-push-action
 
+- [cosign-sign-push-action](#cosign-sign-push-action)
+  - [Features](#features)
+  - [How to Use](#how-to-use)
+    - [Cosign Local Keys](#cosign-local-keys)
+      - [Workflow](#workflow)
+      - [Generate Key Pair](#generate-key-pair)
+    - [GitHub Action](#github-action)
+      - [Workflow](#workflow-1)
+      - [Input Variables](#input-variables)
+    - [Configure Kubernetes Cluster](#configure-kubernetes-cluster)
+      - [Workflow](#workflow-2)
+      - [Helm Chart](#helm-chart)
+      - [Create Policies](#create-policies)
+  - [Usage example:](#usage-example)
+  - [Reference links](#reference-links)
+
 ## Features
 
 - Based on `cosign` local keys.
