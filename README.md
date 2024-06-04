@@ -8,8 +8,7 @@
 ## Topics
 
 - [Key Generation](./docs/key-management.md)
-- [Configure Policy controller in kubernetes cluster](./docs/policy-controller.md)
-- [Create Policies](./docs/policy.md)
+- [Configure Kubernetes cluster](./docs/k8s.md)
 
 ## Input Variables
 
