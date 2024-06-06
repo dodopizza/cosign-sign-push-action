@@ -2,47 +2,47 @@
 
 ## About
 
-GitHub Action to sign images using local `cosign` keys; see the [Cosign Documentation on Local Keys][8] for more details.
+GitHub Action to sign images using local `cosign` keys; see the [Cosign documentation on local keys][8] for more details.
 
-## Getting Started
+## Getting started
 
-1. **Generate Cosign Keys**: 
-   - To use this action, you need to start by generating Cosign keys. Follow the [Key Generation][4] guide for detailed instructions.
-2. **(Optional) Set Up Image Verification in Kubernetes**: 
+1. **Generate cosign keys**:
+   - To use this action, you need to start by generating cosign keys. Follow the [key generation][4] guide for detailed instructions.
+2. **(Optional) Set up image verification in Kubernetes**:
    - If you want to enforce image verification in your Kubernetes cluster, you can set up a policy controller. Here are a few options to consider:
-     - **Cosign Policy Controller**: Our example configuration includes a Cosign policy and instructions on how to configure a namespace in your Kubernetes cluster. For more details, refer to the [Install cosign policy controller][1] guide and the [Cosign Policy Controller Documentation][7].
-     - **Kyverno Policies**: Use [Kyverno Policies][5] to enforce image signature verification.
-     - **OPA Gatekeeper**: Use [OPA Gatekeeper][6] with custom policies for image verification.
+     - **Cosign policy controller**: our example configuration includes a Cosign policy and instructions on how to configure a namespace in your Kubernetes cluster. For more details, refer to the [install Cosign policy controller][1] guide and the [Cosign policy controller documentation][7].
+     - **Kyverno policies**: use [Kyverno policies][5] to enforce image signature verification.
+     - **OPA Gatekeeper**: use [OPA Gatekeeper][6] with custom policies for image verification.
 
-## Reference Links
+## Reference links
 
-### Official Documentation
+### Official documentation
 - [Cosign][2]
-- [Cosign Local Keys][8]
-- [Cosign Installer for GitHub Actions][3]
-- [Cosign Policy Controller][7]
-- [Kyverno Policies][5]
+- [Cosign local keys][8]
+- [Cosign installer for GitHub Actions][3]
+- [Cosign policy controller][7]
+- [Kyverno policies][5]
 - [OPA Gatekeeper][6]
 
-### Quick Start Guides
-- [Key Generation][4]
-- [Install Cosign Policy Controller][1]
+### Quick start guides
+- [Key generation][4]
+- [Install Cosign policy controller][1]
 
-## Input Variables
+## Input variables
 
-| Variable             | Required | Description                                                                                                                  |
-| -------------------- | :------: | ---------------------------------------------------------------------------------------------------------------------------- |
-| `image-tags`         |   Yes    | List of image tags. Tags are used to denote different versions or variants of an image,<br>e.g., "latest", "v1.0", "stable". |
-| `image-digest`       |   Yes    | Image digest. This is a unique identifier for the image, represented as a hash of its contents.                              |
-| `cosign-private-key` |   Yes    | Cosign private key used for signing container images.                                                                        |
-| `cosign-password`    |   Yes    | Password for the Cosign private key.                                                                                         |
+| Variable             | Required | Description                                                                                                               |
+| -------------------- | :------: | ------------------------------------------------------------------------------------------------------------------------- |
+| `image-tags`         |   Yes    | List of image tags. Tags are used to denote different versions or variants of an image, e.g., "latest", "v1.0", "stable". |
+| `image-digest`       |   Yes    | Image digest. This is a unique identifier for the image, represented as a hash of its contents.                           |
+| `cosign-private-key` |   Yes    | Cosign private key used for signing container images.                                                                     |
+| `cosign-password`    |   Yes    | Password for the Cosign private key.                                                                                      |
 
 ## Usage example
 
-To use this example, you need to generate Cosign keys and store them in GitHub Actions Secrets:
+To use this example, you need to generate Cosign keys and store them in GitHub Actions secrets:
 
-  - `COSIGN_PASSWORD`: password for the private key.
-  - `COSIGN_PRIVATE_KEY`: private key.
+- `COSIGN_PASSWORD`: password for the private key.
+- `COSIGN_PRIVATE_KEY`: private key.
 
 ```yaml
 name: Build and sign image
