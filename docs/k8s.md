@@ -1,5 +1,7 @@
 # Configure Kubernetes cluster
 
+
+
 ## Requirements
 
 If you still haven't key pairs to sign the images, please read [Key Generation](./docs/key-management.md) article
